@@ -1,0 +1,17 @@
+---
+# tasks file for haproxy-deploy
+  - name: install {{ lb-package }}
+    yum:
+      name: "{{ lb-package }}"
+      state: latest
+
+  - name: enable {{ lb-package }}
+    service:
+      name: "{{ lb-package }}"
+      state: started
+
+  - name: configure {{ lb-package }}
+    template:
+      src: templates/haproxy.cfg.j2
+      dest: /etc/haproxy/haproxy.cfg
+    notify: restart {{ lb-package }}

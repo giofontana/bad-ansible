@@ -1,0 +1,7 @@
+---
+# handlers file for haproxy-deploy
+
+  - name: restart {{ lb-package }}
+    service:
+      name: "{{ lb-package }}"
+      state: restarted
